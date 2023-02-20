@@ -1,35 +1,4 @@
-/* h1{
-  font-weight: bold;
-  font-size: 4em;
-  text-align: center;
-}
 
-img {
-  height: 300px;
-  width: 300px;
-  margin-left: auto;
-  margin-right: auto;
-  display: inline-block;
-}
-
-div{
-  border: 1px solid black;
-  width: fit-content;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* #show-results-button{
-} */
-/* 
-ul {
-  width: fit-content;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 5px;
-/* } */ 
 body {
   background-color: #212529;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -47,7 +16,7 @@ h1 {
 }
 
 
-#img-container {
+#imgContainer {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -163,3 +132,36 @@ footer {
   margin-right: 20px;
   color: #7e57c2
 }
+/* My crappy CSS design I did previously */
+/* h1{
+  font-weight: bold;
+  font-size: 4em;
+  text-align: center;
+}
+
+img {
+  height: 300px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+}
+
+div{
+  border: 1px solid black;
+  width: fit-content;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* #show-results-button{
+} */
+/* 
+ul {
+  width: fit-content;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+/* } */ 

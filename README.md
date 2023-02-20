@@ -7,6 +7,9 @@
 -
 - button to view results when clicks, showcasing votes and times seen
 
+## Lighthouse Score
+
+![Lighthouse](img/lighthouseScore.png)
 
 Author: Reece
 Co-Author: Audrey

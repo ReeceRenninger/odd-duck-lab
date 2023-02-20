@@ -19,3 +19,12 @@ div{
   margin-left: auto;
   margin-right: auto;
 }
+
+ul {
+  border: 1px dashed red;
+  width: fit-content;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+}

@@ -8,7 +8,7 @@ let votingRounds = 25;
 
 
 //***** DOM WINDOWS */
-
+let voteElem = document.getElementById('voteElem');
 let imgContainer = document.getElementById('imgContainer');
 let imgOne = document.getElementById('firstImg');
 let imgTwo = document.getElementById('secondImg');
@@ -91,13 +91,19 @@ function handleVoteResults(){
     for(let i = 0; i < imgArray.length; i++){
       let productListItem = document.createElement('li');
       productListItem.textContent =
-      `${imgArray[i].name}: views:${imgArray[i].views} votes:${imgArray[i].votes}`;
+      `${imgArray[i].name}: Views: ${imgArray[i].views} Votes: ${imgArray[i].votes}`;
       resultsList.appendChild(productListItem);
     }
     resultsBtn.removeEventListener('click', handleVoteResults);
   }
 }
-
+function voteCountdown(){
+  for(let i = 25; i > votingRounds.length; i--){
+    let voteCounter = document.createElement('p');
+    voteCounter.textContent(i);
+    voteElem.appendChild(voteCounter);
+  }
+}
 //********* EXECUTABLE CODE */
 let bag = new Product('bag');
 let banana = new Product('banana');

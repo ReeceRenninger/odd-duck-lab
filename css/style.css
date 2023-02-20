@@ -20,8 +20,10 @@ div{
   margin-right: auto;
 }
 
+/* #show-results-button{
+} */
+
 ul {
-  border: 1px dashed red;
   width: fit-content;
   text-align: center;
   margin-left: auto;

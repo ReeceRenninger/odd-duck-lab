@@ -68,7 +68,7 @@ function randomImgByIndex() {
 function handleImgClick(event) {
   //TODO: IDENTIFY THE IMG THAT WAS CLICKED
   let imgClicked = event.target.title;
-  console.dir(imgClicked);
+  console.dir(imgClicked); // prints title of img clicked in console
   // TODO: TRACK NUMBER OF CLICKS ON THAT IMAGE
   for (let i = 0; i < imgArray.length; i++) {
     if (imgClicked === imgArray[i].name) {

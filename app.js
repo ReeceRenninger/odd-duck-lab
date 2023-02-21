@@ -27,14 +27,11 @@ function Product(name, fileExtension = 'jpg') {
 
 
 //******** HELPER FUNCTION / UTILITIES */
-// // TODO: 3 images on page
 function renderImgs() {
   let imgOneIndex = randomImgByIndex();
   let imgTwoIndex = randomImgByIndex();
   let imgThreeIndex = randomImgByIndex();
 
-  // // !! THIS IS NOT WORKING NEED TO FIX
-  // // TODO: make images UNIQUE to display
   // ** compare image one vs two and three and if they are the same, get a new randomImg for indexOne
   // 4, 7, 7 . change 1 and 2, 3 would stay 7, 3, 7.... 4, 5, 7
   while (imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex
@@ -55,7 +52,6 @@ function renderImgs() {
   imgThree.alt = `this is an image of ${imgArray[imgThreeIndex].name}`;
   imgThree.title = imgArray[imgThreeIndex].name;
 
-  // // TODO: INCREASE VIEWS ON IMAGES
   imgArray[imgOneIndex].views++;
   imgArray[imgTwoIndex].views++;
   imgArray[imgThreeIndex].views++;
@@ -64,25 +60,20 @@ function renderImgs() {
 function randomImgByIndex() {
   return Math.floor(Math.random() * imgArray.length);
 }
-// // !! NOT COUNTING VOTES PROPERLY
+
 function handleImgClick(event) {
-  //TODO: IDENTIFY THE IMG THAT WAS CLICKED
   let imgClicked = event.target.title;
   console.dir(imgClicked); // prints title of img clicked in console
-  // TODO: TRACK NUMBER OF CLICKS ON THAT IMAGE
   for (let i = 0; i < imgArray.length; i++) {
     if (imgClicked === imgArray[i].name) {
       imgArray[i].votes++;
+      votingRounds--;
+      renderImgs(); // combining all logic in if loop forces user to click img or wont cycle
     }
   }
-  // // TODO: DECREMENT THE VOTING ROUNDS
-  votingRounds--;
-  // // TODO: RERENDER OF IMAGES
-  renderImgs();
-  // // TODO: ONCE VOTING ROUND ENDS, STOP THE CLICK
   if (votingRounds === 0) {
     imgContainer.removeEventListener('click', handleImgClick);
-    // document.getElementById('show-results-btn').style = 'visiblity: visible';
+
   }
 }
 

@@ -8,15 +8,15 @@ let votingRounds = 25;
 
 
 //***** DOM WINDOWS */
-let voteElem = document.getElementById('voteElem');
 let imgContainer = document.getElementById('imgContainer');
 let imgOne = document.getElementById('firstImg');
 let imgTwo = document.getElementById('secondImg');
 let imgThree = document.getElementById('thirdImg');
 let resultsBtn = document.getElementById('show-results-btn');
-let resultsList = document.getElementById('results-container');
+// let resultsList = document.getElementById('results-container');
+let ctx = document.getElementById('myChart');
 
-//**** CONSTRUCTOR FUNCTION */
+//********** CONSTRUCTOR FUNCTION **************/
 function Product(name, fileExtension = 'jpg') {
   this.name = name;
   //use name above to route the img src and attach jpg extension
@@ -24,7 +24,44 @@ function Product(name, fileExtension = 'jpg') {
   this.views = 0;
   this.votes = 0;
 }
+//*********** CHART RENDER ************/
+function renderChart() {
 
+  let prodNames = [];
+  let prodVotes = [];
+  let prodViews = [];
+
+  for(let i =0; i < imgArray.length;i++){
+    prodNames.push(imgArray[i].name);
+    prodVotes.push(imgArray[i].votes);
+    prodViews.push(imgArray[i].views);
+  }
+
+  let chartObj = {
+    type: 'bar',
+    data: {
+      labels: prodNames,
+      datasets: [{
+        label: '# of Votes',
+        data: prodVotes,
+        borderWidth: 1,
+      },
+      {
+        label: '# of Views',
+        data: prodViews,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+  new Chart (ctx, chartObj); // calls Chart constructor from script tag to library ** 2 args for Chart Constructor - canvas element, config obj with prod data
+}
 
 //******** HELPER FUNCTION / UTILITIES */
 function renderImgs() {
@@ -32,10 +69,9 @@ function renderImgs() {
   let imgTwoIndex = randomImgByIndex();
   let imgThreeIndex = randomImgByIndex();
 
-  // ** compare image one vs two and three and if they are the same, get a new randomImg for indexOne
   // 4, 7, 7 . change 1 and 2, 3 would stay 7, 3, 7.... 4, 5, 7
   while (imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex
-  ){
+  ) {
     imgOneIndex = randomImgByIndex();
     imgTwoIndex = randomImgByIndex();
   }
@@ -77,24 +113,19 @@ function handleImgClick(event) {
   }
 }
 
-function handleVoteResults(){
-  if(votingRounds === 0){
-    for(let i = 0; i < imgArray.length; i++){
-      let productListItem = document.createElement('li');
-      productListItem.textContent =
-      `${imgArray[i].name}: Views: ${imgArray[i].views} Votes: ${imgArray[i].votes}`;
-      resultsList.appendChild(productListItem);
+function handleVoteResults() {
+  if (votingRounds === 0) {
+    for (let i = 0; i < imgArray.length; i++) {
+      // let productListItem = document.createElement('li');
+      // productListItem.textContent =
+      //   `${imgArray[i].name}: Views: ${imgArray[i].views} Votes: ${imgArray[i].votes}`;
+      // resultsList.appendChild(productListItem);
     }
     resultsBtn.removeEventListener('click', handleVoteResults);
+    renderChart();
   }
 }
-function voteCountdown(){
-  for(let i = 25; i > votingRounds.length; i--){
-    let voteCounter = document.createElement('p');
-    voteCounter.textContent(i);
-    voteElem.appendChild(voteCounter);
-  }
-}
+
 //********* EXECUTABLE CODE */
 let bag = new Product('bag');
 let banana = new Product('banana');
@@ -118,6 +149,7 @@ let wineglass = new Product('wine-glass');
 
 imgArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);// all obejcts created above
 console.log(imgArray);
+
 renderImgs();
 
 imgContainer.addEventListener('click', handleImgClick);

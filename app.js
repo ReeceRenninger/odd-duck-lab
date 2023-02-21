@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 //***** GLOBAL VARIABLES *///
 let imgArray = [];
 let votingRounds = 25;
@@ -65,10 +63,6 @@ function renderChart() {
 
 //******** HELPER FUNCTION / UTILITIES */
 function renderImgs() {
-  //  TODO: MAKE SUBSEQUENT ROUNDS CANNOT MATCH PREVIOUS ROUNDS
-  //round 1: A, B, C
-  //round 2: J, M, O
-  //round 3: A, C, B
   while (indexArray.length < 6) {
     let randNum = randomImgByIndex();
     if (!indexArray.includes(randNum)){
@@ -114,7 +108,6 @@ function handleImgClick(event) {
   }
   if (votingRounds === 0) {
     imgContainer.removeEventListener('click', handleImgClick);
-
   }
 }
 
@@ -146,10 +139,9 @@ let unicorn = new Product('unicorn');
 let watercan = new Product('water-can');
 let wineglass = new Product('wine-glass');
 
-imgArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);// all obejcts created above
-console.log(imgArray);
-
+imgArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);
 renderImgs();
 
 imgContainer.addEventListener('click', handleImgClick);
 resultsBtn.addEventListener('click', handleVoteResults);
+console.log(imgArray);

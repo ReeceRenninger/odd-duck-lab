@@ -5,7 +5,7 @@
 //***** GLOBAL VARIABLES *///
 let imgArray = [];
 let votingRounds = 25;
-
+let indexArray = [];
 
 //***** DOM WINDOWS */
 let imgContainer = document.getElementById('imgContainer');
@@ -13,8 +13,8 @@ let imgOne = document.getElementById('firstImg');
 let imgTwo = document.getElementById('secondImg');
 let imgThree = document.getElementById('thirdImg');
 let resultsBtn = document.getElementById('show-results-btn');
-// let resultsList = document.getElementById('results-container');
 let ctx = document.getElementById('myChart');
+
 
 //********** CONSTRUCTOR FUNCTION **************/
 function Product(name, fileExtension = 'jpg') {
@@ -31,7 +31,7 @@ function renderChart() {
   let prodVotes = [];
   let prodViews = [];
 
-  for(let i =0; i < imgArray.length;i++){
+  for (let i = 0; i < imgArray.length; i++) {
     prodNames.push(imgArray[i].name);
     prodVotes.push(imgArray[i].votes);
     prodViews.push(imgArray[i].views);
@@ -40,15 +40,15 @@ function renderChart() {
   let chartObj = {
     type: 'bar',
     data: {
-      labels: prodNames,
+      labels: prodNames, //** NEEDS TO BE AN ARRAY DATA TYPE **//
       datasets: [{
         label: '# of Votes',
-        data: prodVotes,
+        data: prodVotes, //** NEEDS TO BE AN ARRAY DATA TYPE **//
         borderWidth: 1,
       },
       {
         label: '# of Views',
-        data: prodViews,
+        data: prodViews, //** NEEDS TO BE AN ARRAY DATA TYPE **//
         borderWidth: 1
       }]
     },
@@ -60,21 +60,26 @@ function renderChart() {
       }
     }
   };
-  new Chart (ctx, chartObj); // calls Chart constructor from script tag to library ** 2 args for Chart Constructor - canvas element, config obj with prod data
+  new Chart(ctx, chartObj); // calls Chart constructor from script tag to library ** 2 args for Chart Constructor - canvas element, config obj with prod data
 }
 
 //******** HELPER FUNCTION / UTILITIES */
 function renderImgs() {
-  let imgOneIndex = randomImgByIndex();
-  let imgTwoIndex = randomImgByIndex();
-  let imgThreeIndex = randomImgByIndex();
-
-  // 4, 7, 7 . change 1 and 2, 3 would stay 7, 3, 7.... 4, 5, 7
-  while (imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex
-  ) {
-    imgOneIndex = randomImgByIndex();
-    imgTwoIndex = randomImgByIndex();
+  //  TODO: MAKE SUBSEQUENT ROUNDS CANNOT MATCH PREVIOUS ROUNDS
+  //round 1: A, B, C
+  //round 2: J, M, O
+  //round 3: A, C, B
+  while (indexArray.length < 6) {
+    let randNum = randomImgByIndex();
+    if (!indexArray.includes(randNum)){
+      indexArray.push(randNum);
+    }
   }
+  console.log(indexArray);
+
+  let imgOneIndex = indexArray.shift();
+  let imgTwoIndex = indexArray.shift();
+  let imgThreeIndex = indexArray.shift();
 
   imgOne.src = imgArray[imgOneIndex].image;
   imgOne.alt = `this is an image of ${imgArray[imgOneIndex].name}`;
@@ -115,12 +120,6 @@ function handleImgClick(event) {
 
 function handleVoteResults() {
   if (votingRounds === 0) {
-    for (let i = 0; i < imgArray.length; i++) {
-      // let productListItem = document.createElement('li');
-      // productListItem.textContent =
-      //   `${imgArray[i].name}: Views: ${imgArray[i].views} Votes: ${imgArray[i].votes}`;
-      // resultsList.appendChild(productListItem);
-    }
     resultsBtn.removeEventListener('click', handleVoteResults);
     renderChart();
   }

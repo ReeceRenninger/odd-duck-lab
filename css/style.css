@@ -1,7 +1,7 @@
 
 body {
-  background-color: #212529;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgba(128, 128, 128, 0.61);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 h1 {
@@ -125,13 +125,17 @@ img {
   }
 }
 
+/* #mychart {
+  border: 1px white solid;
+} */
+/* 
 footer {
   height: 100px;
   font-size: 1.5em;
   text-align: right;
   margin-right: 20px;
   color: #7e57c2
-}
+} */
 /* My crappy CSS design I did previously */
 /* h1{
   font-weight: bold;

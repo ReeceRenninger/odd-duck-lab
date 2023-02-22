@@ -65,11 +65,10 @@ function renderChart() {
 function renderImgs() {
   while (indexArray.length < 6) {
     let randNum = randomImgByIndex();
-    if (!indexArray.includes(randNum)){
+    if (!indexArray.includes(randNum)) {
       indexArray.push(randNum);
     }
   }
-  console.log(indexArray);
 
   let imgOneIndex = indexArray.shift();
   let imgTwoIndex = indexArray.shift();
@@ -98,7 +97,7 @@ function randomImgByIndex() {
 
 function handleImgClick(event) {
   let imgClicked = event.target.title;
-  console.dir(imgClicked); // prints title of img clicked in console
+  // console.dir(imgClicked); prints title of img clicked in console
   for (let i = 0; i < imgArray.length; i++) {
     if (imgClicked === imgArray[i].name) {
       imgArray[i].votes++;
@@ -107,6 +106,13 @@ function handleImgClick(event) {
     }
   }
   if (votingRounds === 0) {
+    // !! STEP 1 = CONVERT OUR DATA TO A STRING TO STORE IN LOCAL STORAGE
+    let stringifiedImgArray = JSON.stringify(imgArray);
+    console.log('Stringified ImgArray', stringifiedImgArray);
+
+    // !! STEP 2 = SET STRINGIFIED IMGARRAY INTO LOCAL STORAGE
+    localStorage.setItem('imgArray', stringifiedImgArray);
+
     imgContainer.removeEventListener('click', handleImgClick);
   }
 }
@@ -118,28 +124,84 @@ function handleVoteResults() {
   }
 }
 
+//TODO: BONUS OBJ: create a queryselector and set style to visible for a link to bring user to chart.html/ grab the local storage content and paste into new JS file and connect to chart html
 //********* EXECUTABLE CODE */
-let bag = new Product('bag');
-let banana = new Product('banana');
-let bathroom = new Product('bathroom');
-let boots = new Product('boots');
-let breakfast = new Product('breakfast');
-let bubblegum = new Product('bubblegum');
-let chair = new Product('chair');
-let cthulhu = new Product('cthulhu');
-let dogduck = new Product('dog-duck');
-let dragon = new Product('dragon');
-let pen = new Product('pen');
-let petsweep = new Product('pet-sweep');
-let scissors = new Product('scissors');
-let shark = new Product('shark');
-let sweep = new Product('sweep', 'png');
-let tauntaun = new Product('tauntaun');
-let unicorn = new Product('unicorn');
-let watercan = new Product('water-can');
-let wineglass = new Product('wine-glass');
 
-imgArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);
+//******** LOCAL STORAGE CONTINUES.... */
+
+// !! STEP THREE - GET INFORMATION FROM LS
+let retrievedArr = localStorage.getItem('imgArray');
+console.log('IMG from LS', retrievedArr);
+// !! STEP 4 - CONVERT INFO FROM LS BACK TO USEABLE CODE
+let parsedData = JSON.parse(retrievedArr); // turns data back into an object from being a string
+console.log('Parsed Data>>>>>', parsedData);
+
+//*********** REBUILD IMGARRAY USING CONSTRUCTOR */
+
+// if (retrievedArr) {
+//   for (let i = 0; i < parsedData.length; i++)
+//     if (parsedData[i].name === 'sweep') {
+//       let reconstructedSweep = new Product(parsedData[i].name, 'png');
+//       reconstructedSweep.views = parsedData[i].views; // HOLDS THE PERSISTENT DATA
+//       reconstructedSweep.votes = parsedData[i].votes;
+//       imgArray.push(reconstructedSweep);
+//     } else {
+//       let reconstructedProduct = new Product(parsedData[i].name);
+//       reconstructedProduct.views = parsedData[i].views;
+//       reconstructedProduct.votes = parsedData[i].votes;
+//       imgArray.push(reconstructedProduct);
+//     } else {
+//   let bag = new Product('bag');
+//   let banana = new Product('banana');
+//   let bathroom = new Product('bathroom');
+//   let boots = new Product('boots');
+//   let breakfast = new Product('breakfast');
+//   let bubblegum = new Product('bubblegum');
+//   let chair = new Product('chair');
+//   let cthulhu = new Product('cthulhu');
+//   let dogduck = new Product('dog-duck');
+//   let dragon = new Product('dragon');
+//   let pen = new Product('pen');
+//   let petsweep = new Product('pet-sweep');
+//   let scissors = new Product('scissors');
+//   let shark = new Product('shark');
+//   let sweep = new Product('sweep', 'png');
+//   let tauntaun = new Product('tauntaun');
+//   let unicorn = new Product('unicorn');
+//   let watercan = new Product('water-can');
+//   let wineglass = new Product('wine-glass');
+//   imgArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);
+// }
+// }
+
+///**** EASIER PATH */
+if(retrievedArr){
+  imgArray = parsedData;
+} else {
+  let bag = new Product('bag');
+  let banana = new Product('banana');
+  let bathroom = new Product('bathroom');
+  let boots = new Product('boots');
+  let breakfast = new Product('breakfast');
+  let bubblegum = new Product('bubblegum');
+  let chair = new Product('chair');
+  let cthulhu = new Product('cthulhu');
+  let dogduck = new Product('dog-duck');
+  let dragon = new Product('dragon');
+  let pen = new Product('pen');
+  let petsweep = new Product('pet-sweep');
+  let scissors = new Product('scissors');
+  let shark = new Product('shark');
+  let sweep = new Product('sweep', 'png');
+  let tauntaun = new Product('tauntaun');
+  let unicorn = new Product('unicorn');
+  let watercan = new Product('water-can');
+  let wineglass = new Product('wine-glass');
+  imgArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);
+}
+
+console.log('ORIGINAL IMGARRAY>>>', imgArray);
+console.log('REPARSED IMG ARRAY>>>', retrievedArr);
 renderImgs();
 
 imgContainer.addEventListener('click', handleImgClick);

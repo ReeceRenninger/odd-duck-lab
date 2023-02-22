@@ -122,14 +122,10 @@ function handleVoteResults() {
 }
 
 //TODO: BONUS OBJ: create a queryselector and set style to visible for a link to bring user to chart.html/ grab the local storage content and paste into new JS file and connect to chart html
-//********* EXECUTABLE CODE */
 
 //******** LOCAL STORAGE CONTINUES.... */
-
-// !! STEP THREE - GET INFORMATION FROM LS
 let retrievedArr = localStorage.getItem('imgArray');
 console.log('IMG from LS', retrievedArr);
-// !! STEP 4 - CONVERT INFO FROM LS BACK TO USEABLE CODE
 let parsedData = JSON.parse(retrievedArr); // turns data back into an object from being a string
 console.log('Parsed Data>>>>>', parsedData);
 
@@ -199,6 +195,7 @@ else {
 //   let wineglass = new Product('wine-glass');
 //   imgArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);
 // }
+//********* EXECUTABLE CODE */
 
 console.log('ORIGINAL IMGARRAY>>>', imgArray);
 console.log('REPARSED IMG ARRAY>>>', retrievedArr);

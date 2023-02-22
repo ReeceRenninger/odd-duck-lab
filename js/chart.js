@@ -21,7 +21,7 @@ function renderChart() {
   }
 
   let chartObj = {
-    type: 'pie',
+    type: 'radar',
     data: {
       labels: prodNames, //** NEEDS TO BE AN ARRAY DATA TYPE **//
       datasets: [{

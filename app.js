@@ -106,11 +106,8 @@ function handleImgClick(event) {
     }
   }
   if (votingRounds === 0) {
-    // !! STEP 1 = CONVERT OUR DATA TO A STRING TO STORE IN LOCAL STORAGE
     let stringifiedImgArray = JSON.stringify(imgArray);
     console.log('Stringified ImgArray', stringifiedImgArray);
-
-    // !! STEP 2 = SET STRINGIFIED IMGARRAY INTO LOCAL STORAGE
     localStorage.setItem('imgArray', stringifiedImgArray);
 
     imgContainer.removeEventListener('click', handleImgClick);
@@ -138,46 +135,22 @@ console.log('Parsed Data>>>>>', parsedData);
 
 //*********** REBUILD IMGARRAY USING CONSTRUCTOR */
 
-// if (retrievedArr) {
-//   for (let i = 0; i < parsedData.length; i++)
-//     if (parsedData[i].name === 'sweep') {
-//       let reconstructedSweep = new Product(parsedData[i].name, 'png');
-//       reconstructedSweep.views = parsedData[i].views; // HOLDS THE PERSISTENT DATA
-//       reconstructedSweep.votes = parsedData[i].votes;
-//       imgArray.push(reconstructedSweep);
-//     } else {
-//       let reconstructedProduct = new Product(parsedData[i].name);
-//       reconstructedProduct.views = parsedData[i].views;
-//       reconstructedProduct.votes = parsedData[i].votes;
-//       imgArray.push(reconstructedProduct);
-//     } else {
-//   let bag = new Product('bag');
-//   let banana = new Product('banana');
-//   let bathroom = new Product('bathroom');
-//   let boots = new Product('boots');
-//   let breakfast = new Product('breakfast');
-//   let bubblegum = new Product('bubblegum');
-//   let chair = new Product('chair');
-//   let cthulhu = new Product('cthulhu');
-//   let dogduck = new Product('dog-duck');
-//   let dragon = new Product('dragon');
-//   let pen = new Product('pen');
-//   let petsweep = new Product('pet-sweep');
-//   let scissors = new Product('scissors');
-//   let shark = new Product('shark');
-//   let sweep = new Product('sweep', 'png');
-//   let tauntaun = new Product('tauntaun');
-//   let unicorn = new Product('unicorn');
-//   let watercan = new Product('water-can');
-//   let wineglass = new Product('wine-glass');
-//   imgArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);
-// }
-// }
-
-///**** EASIER PATH */
-if(retrievedArr){
-  imgArray = parsedData;
-} else {
+if (retrievedArr) {
+  for (let i = 0; i < parsedData.length; i++) {
+    if (parsedData[i].name === 'sweep') {
+      let reconstructedSweep = new Product(parsedData[i].name, 'png');
+      reconstructedSweep.views = parsedData[i].views; // HOLDS THE PERSISTENT DATA
+      reconstructedSweep.votes = parsedData[i].votes;
+      imgArray.push(reconstructedSweep);
+    } else {
+      let reconstructedProduct = new Product(parsedData[i].name);
+      reconstructedProduct.views = parsedData[i].views;
+      reconstructedProduct.votes = parsedData[i].votes;
+      imgArray.push(reconstructedProduct);
+    }
+  }
+}
+else {
   let bag = new Product('bag');
   let banana = new Product('banana');
   let bathroom = new Product('bathroom');
@@ -199,6 +172,33 @@ if(retrievedArr){
   let wineglass = new Product('wine-glass');
   imgArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);
 }
+
+
+///**** EASIER PATH */
+// if(retrievedArr){
+//   imgArray = parsedData;
+// } else {
+//   let bag = new Product('bag');
+//   let banana = new Product('banana');
+//   let bathroom = new Product('bathroom');
+//   let boots = new Product('boots');
+//   let breakfast = new Product('breakfast');
+//   let bubblegum = new Product('bubblegum');
+//   let chair = new Product('chair');
+//   let cthulhu = new Product('cthulhu');
+//   let dogduck = new Product('dog-duck');
+//   let dragon = new Product('dragon');
+//   let pen = new Product('pen');
+//   let petsweep = new Product('pet-sweep');
+//   let scissors = new Product('scissors');
+//   let shark = new Product('shark');
+//   let sweep = new Product('sweep', 'png');
+//   let tauntaun = new Product('tauntaun');
+//   let unicorn = new Product('unicorn');
+//   let watercan = new Product('water-can');
+//   let wineglass = new Product('wine-glass');
+//   imgArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);
+// }
 
 console.log('ORIGINAL IMGARRAY>>>', imgArray);
 console.log('REPARSED IMG ARRAY>>>', retrievedArr);

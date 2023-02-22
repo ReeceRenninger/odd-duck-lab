@@ -45,5 +45,6 @@ function renderChart() {
   };
   new Chart(canvasElem, chartObj); // calls Chart constructor from script tag to library ** 2 args for Chart Constructor - canvas element, config obj with prod data
 }
-if()
-renderChart();
+if(retrievedArr){
+  renderChart();
+}

@@ -12,8 +12,7 @@ let imgTwo = document.getElementById('secondImg');
 let imgThree = document.getElementById('thirdImg');
 let resultsBtn = document.getElementById('show-results-btn');
 let ctx = document.getElementById('myChart');
-
-
+document.querySelector('h3').style.visibility = 'hidden';
 //********** CONSTRUCTOR FUNCTION **************/
 function Product(name, fileExtension = 'jpg') {
   this.name = name;
@@ -111,6 +110,7 @@ function handleImgClick(event) {
     localStorage.setItem('imgArray', stringifiedImgArray);
 
     imgContainer.removeEventListener('click', handleImgClick);
+    document.querySelector('h3').style.visibility = 'visible';
   }
 }
 
